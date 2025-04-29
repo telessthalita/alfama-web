@@ -17,18 +17,18 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (! isset($data['full_name']) || ! isset($data['email'])) {
+if (! isset($data['name']) || ! isset($data['email'])) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Dados incompletos']);
     exit;
 }
 
-$full_name = filter_var($data['full_name'], FILTER_SANITIZE_STRING);
-$email     = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-$phone     = isset($data['phone']) ? preg_replace('/\D/', '', $data['phone']) : null;
-$company   = isset($data['company']) ? filter_var($data['company'], FILTER_SANITIZE_STRING) : null;
-$cpf       = isset($data['cpf']) ? preg_replace('/\D/', '', $data['cpf']) : null;
-$address   = isset($data['address']) ? filter_var($data['address'], FILTER_SANITIZE_STRING) : null;
+$name    = filter_var($data['name'], FILTER_SANITIZE_STRING);
+$email   = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
+$phone   = isset($data['phone']) ? preg_replace('/\D/', '', $data['phone']) : null;
+$company = isset($data['company']) ? filter_var($data['company'], FILTER_SANITIZE_STRING) : null;
+$cpf     = isset($data['cpf']) ? preg_replace('/\D/', '', $data['cpf']) : null;
+$address = isset($data['address']) ? filter_var($data['address'], FILTER_SANITIZE_STRING) : null;
 
 // Validação de e-mail
 if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -47,7 +47,7 @@ try { $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
     }
 
     $stmt = $pdo->prepare("UPDATE users SET
-                          full_name = ?,
+                          name = ?,
                           email = ?,
                           phone = ?,
                           company = ?,
@@ -57,7 +57,7 @@ try { $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
                           WHERE id = ?");
 
     $stmt->execute([
-        $full_name,
+        $name,
         $email,
         $phone,
         $company,

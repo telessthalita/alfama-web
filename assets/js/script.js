@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             const formData = {
-                full_name: getValue('full_name'),
+                name: getValue('name'),
                 email: getValue('email'),
                 phone: getValue('phone').replace(/\D/g, ''),
                 company: getValue('company'),
@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             let isValid = true;
 
-            if (!formData.full_name || formData.full_name.split(' ').length < 2) {
-                document.getElementById('full_name').classList.add('is-invalid');
+            if (!formData.name || formData.name.split(' ').length < 2) {
+                document.getElementById('name').classList.add('is-invalid');
                 isValid = false;
             }
 
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     showToast('Sucesso', 'Perfil atualizado com sucesso!');
                     if (data.user) {
-                        document.getElementById('full_name').value = data.user.full_name;
+                        document.getElementById('name').value = data.user.name;
                         document.getElementById('email').value = data.user.email;
                     }
                 })
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function handleRegister(e) {
         e.preventDefault();
-        const full_name = document.getElementById('full_name')?.value.trim() || '';
+        const name = document.getElementById('name')?.value.trim() || '';
         const email = document.getElementById('email')?.value.trim() || '';
         const password = document.getElementById('password')?.value.trim() || '';
 
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch('process/register.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ full_name, email, password })
+                body: JSON.stringify({ name, email, password })
             });
 
             const data = await response.json();
