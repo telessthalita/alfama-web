@@ -27,21 +27,10 @@ Funcionalidades principais:
 
 ## 🛠️ Pré-requisitos
 
-Componente
-
-Versão
-
-PHP
-
-8.2.12+
-
+PHP - 8.2.12+
 XAMPP
-
-
 MySQL
-
 Git
-
 
 ## 🚀 Instalação Passo a Passo
 

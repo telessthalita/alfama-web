@@ -100,45 +100,37 @@
   .login-container {
     flex-direction: column;
   }
-
   .form-section,
   .image-section {
     flex: none;
     width: 100%;
     padding: 40px 20px;
   }
-
   .form-section h2 {
     margin-top: 2rem;
   }
-
   .form-section .container {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
-
   .image-section {
     min-height: 300px;
     padding: 40px 20px;
   }
-
   .image-overlay h3 {
     font-size: 1.8rem;
   }
-
   .image-overlay p,
   .comments,
   .rating {
     font-size: 0.9rem;
   }
-
   .arrows {
     bottom: 10px;
     right: 10px;
     font-size: 1.2rem;
   }
-
   .privacy {
     position: relative;
     text-align: center;
@@ -146,17 +138,14 @@
     left: auto;
     bottom: auto;
   }
-
   #loginForm {
     width: 100%;
   }
-
   .btn,
   .btn-outline-dark {
     width: 100% !important;
   }
 }
-
   </style>
 </head>
 <body>
