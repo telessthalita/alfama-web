@@ -37,22 +37,18 @@
             --header-bg: #046c97;
             --header-text: #fff;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f7fa;
         }
-
         .header-logo {
             height: 30px;
             width: auto;
         }
-
         header {
             padding: 1.5rem 0;
             background-color: var(--header-bg);
         }
-
         .header-link {
             color: var(--header-text);
             font-weight: 600;
@@ -60,37 +56,31 @@
             padding: 0.5rem 1rem;
             border-radius: 4px;
         }
-
         .header-link:hover {
             background-color: rgba(255, 255, 255, 0.2);
         }
-
         .profile-container {
             max-width: 800px;
             margin: 1rem auto;
             padding: 1rem;
         }
-
         .profile-title {
             color: var(--primary-color);
             font-weight: 700;
             margin-bottom: 0.5rem;
             font-size: 1.5rem;
         }
-
         .profile-subtitle {
             font-weight: 600;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
         }
-
         .form-label {
             font-weight: 600;
             margin-bottom: 0.5rem;
             display: block;
         }
-
         .form-control {
             border-radius: 6px;
             padding: 10px 12px;
@@ -98,7 +88,6 @@
             margin-bottom: 1rem;
             width: 100%;
         }
-
         .btn-primary {
             background-color: var(--primary-color);
             border: none;
@@ -107,12 +96,10 @@
             font-weight: 600;
             width: 60%;
         }
-
         .divider {
             border-top: 1px solid #eee;
             margin: 1rem 0;
         }
-
         .avatar-container {
             position: relative;
             width: 120px;
@@ -122,7 +109,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .profile-avatar {
             width: 100%;
             height: 100%;
@@ -131,7 +117,6 @@
             border: 3px solid white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-
         .camera-icon {
             position: absolute;
             bottom: 5px;
@@ -146,15 +131,19 @@
             justify-content: center;
             cursor: pointer;
         }
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
     <header class="container-fluid">
         <div class="container d-flex justify-content-between align-items-center">
             <img src="./assets/img/Logo.png" alt="Logo Alfama" class="header-logo">
-            <a href="?logout=1" class="header-link">
-                <i class="bi bi-box-arrow-right"></i> Sair
-            </a>
+            <a href="?logout=1" class="header-link">Sair</a>
         </div>
     </header>
 
@@ -184,6 +173,7 @@
                             <input type="text" class="form-control" id="name"
                                    value="<?php echo htmlspecialchars($user['name']); ?>"
                                    placeholder="Digite seu nome">
+                            <div class="invalid-feedback" id="name-feedback"></div>
                         </div>
 
                         <div class="form-group">
@@ -191,6 +181,7 @@
                             <input type="text" class="form-control" id="phone"
                                    value="<?php echo htmlspecialchars($user['phone']); ?>"
                                    placeholder="Digite seu telefone">
+                            <div class="invalid-feedback" id="phone-feedback"></div>
                         </div>
 
                         <div class="form-group">
@@ -207,6 +198,7 @@
                             <input type="email" class="form-control" id="email"
                                    value="<?php echo htmlspecialchars($user['email']); ?>"
                                    placeholder="Digite seu email">
+                            <div class="invalid-feedback" id="email-feedback"></div>
                         </div>
 
                         <div class="form-group">
@@ -214,6 +206,7 @@
                             <input type="text" class="form-control" id="cpf"
                                    value="<?php echo htmlspecialchars($user['cpf']); ?>"
                                    placeholder="Digite seu CPF">
+                            <div class="invalid-feedback" id="cpf-feedback"></div>
                         </div>
 
                         <div class="form-group">
@@ -235,6 +228,17 @@
             </form>
         </div>
     </main>
+
+    <!-- Toast Notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto" id="toastTitle">Notificação</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage"></div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.js" type="module"></script>
