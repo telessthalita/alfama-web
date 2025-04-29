@@ -15,6 +15,12 @@
     }
 
     $user = $_SESSION['user'] ?? null;
+
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        header('Location: index.php');
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +61,10 @@
             border-radius: 4px;
         }
 
+        .header-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
         .profile-container {
             max-width: 800px;
             margin: 1rem auto;
@@ -92,14 +102,15 @@
         .btn-primary {
             background-color: var(--primary-color);
             border: none;
-            padding: 10px 24px;
+            padding: 6px 30px;
             border-radius: 6px;
             font-weight: 600;
+            width: 60%;
         }
 
         .divider {
             border-top: 1px solid #eee;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
         }
 
         .avatar-container {
@@ -141,7 +152,9 @@
     <header class="container-fluid">
         <div class="container d-flex justify-content-between align-items-center">
             <img src="./assets/img/Logo.png" alt="Logo Alfama" class="header-logo">
-            <a href="https://alfamaweb.com.br/" target="_blank" class="header-link">Saiba mais</a>
+            <a href="?logout=1" class="header-link">
+                <i class="bi bi-box-arrow-right"></i> Sair
+            </a>
         </div>
     </header>
 
