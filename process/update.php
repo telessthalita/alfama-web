@@ -30,7 +30,6 @@ $company = isset($data['company']) ? filter_var($data['company'], FILTER_SANITIZ
 $cpf     = isset($data['cpf']) ? preg_replace('/\D/', '', $data['cpf']) : null;
 $address = isset($data['address']) ? filter_var($data['address'], FILTER_SANITIZE_STRING) : null;
 
-// Validação de e-mail
 if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'E-mail inválido']);
