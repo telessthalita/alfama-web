@@ -1,4 +1,4 @@
-CREATE DATABASE alfama_web;
+
 USE alfama_web;
 
 CREATE TABLE users (
