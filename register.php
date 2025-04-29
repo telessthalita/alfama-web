@@ -130,7 +130,7 @@
 <div class="login-container">
   <div class="form-section">
     <div class="container d-flex justify-content-between align-items-center">
-      <img src="./assets/img/Logo.png" alt="Logo Alfama" class="logo" />
+      <img src="./assets/img/Azul.png" alt="Logo Alfama" class="logo" />
       <a href="https://alfamaweb.com.br/" target="_blank">Saiba mais</a>
     </div>
     <h2>Criar conta</h2>
@@ -140,7 +140,7 @@
     </button>
     </div>
 
-    <form id="registerForm" style="max-width: 400px;">
+    <form id="registerForm" action="register_backend.php" method="POST" style="max-width: 400px;">
       <div class="mb-3">
         <label for="name" class="form-label">Nome Completo</label>
         <input type="text" id="name" class="form-control" placeholder="Digite seu nome completo" required />

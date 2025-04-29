@@ -103,7 +103,7 @@
 <div class="login-container">
   <div class="form-section">
     <div class="container d-flex justify-content-between align-items-center">
-      <img src="./assets/img/Logo.png" alt="Logo Alfama" class="logo" />
+      <img src="./assets/img/Azul.png" alt="Logo Alfama" class="logo" />
       <a href="https://alfamaweb.com.br/" target="_blank">Saiba mais</a>
     </div>
     <h2>Fazer login</h2>
