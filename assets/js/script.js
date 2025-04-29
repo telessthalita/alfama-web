@@ -26,30 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
         toast.show();
     }
 
-    function validateCPF(cpf) {
-        cpf = cpf.replace(/\D/g, '');
-        if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-
-        let sum = 0;
-        for (let i = 0; i < 9; i++) {
-            sum += parseInt(cpf.charAt(i)) * (10 - i);
-        }
-        let remainder = (sum * 10) % 11;
-        if (remainder === 10 || remainder === 11) remainder = 0;
-        if (remainder !== parseInt(cpf.charAt(9))) return false;
-
-        sum = 0;
-        for (let i = 0; i < 10; i++) {
-            sum += parseInt(cpf.charAt(i)) * (11 - i);
-        }
-        remainder = (sum * 10) % 11;
-        if (remainder === 10 || remainder === 11) remainder = 0;
-        if (remainder !== parseInt(cpf.charAt(10))) return false;
-
-        return true;
-    }
-
-    // Manipuladores de formulário
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', handleLogin);
@@ -62,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const profileForm = document.getElementById('profileForm');
     if (profileForm) {
-        // Máscaras para campos
         const phoneField = document.getElementById('phone');
         const cpfField = document.getElementById('cpf');
 
@@ -81,8 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 e.target.value = value;
-                e.target.classList.remove('is-invalid');
-                document.getElementById('phone-feedback').textContent = '';
             });
         }
 
@@ -96,15 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
 
                 e.target.value = value;
-                e.target.classList.remove('is-invalid');
-                document.getElementById('cpf-feedback').textContent = '';
-            });
-
-            cpfField.addEventListener('blur', function () {
-                if (this.value && !validateCPF(this.value.replace(/\D/g, ''))) {
-                    this.classList.add('is-invalid');
-                    document.getElementById('cpf-feedback').textContent = 'CPF inválido';
-                }
             });
         }
 
@@ -133,19 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!formData.name || formData.name.split(' ').length < 2) {
                 document.getElementById('name').classList.add('is-invalid');
-                document.getElementById('name-feedback').textContent = 'Nome completo é obrigatório';
                 isValid = false;
             }
 
             if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
                 document.getElementById('email').classList.add('is-invalid');
-                document.getElementById('email-feedback').textContent = 'Email inválido';
-                isValid = false;
-            }
-
-            if (formData.cpf && !validateCPF(formData.cpf)) {
-                document.getElementById('cpf').classList.add('is-invalid');
-                document.getElementById('cpf-feedback').textContent = 'CPF inválido';
                 isValid = false;
             }
 
@@ -171,13 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     showToast('Sucesso', 'Perfil atualizado com sucesso!');
                     if (data.user) {
-                        // Atualiza os campos com os novos dados
-                        document.getElementById('name').value = data.user.name || '';
-                        document.getElementById('email').value = data.user.email || '';
-                        document.getElementById('phone').value = data.user.phone || '';
-                        document.getElementById('company').value = data.user.company || '';
-                        document.getElementById('cpf').value = data.user.cpf || '';
-                        document.getElementById('address').value = data.user.address || '';
+                        document.getElementById('name').value = data.user.name;
+                        document.getElementById('email').value = data.user.email;
                     }
                 })
                 .catch(error => {
@@ -185,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
-
     async function handleLogin(e) {
         e.preventDefault();
         const email = document.getElementById('email')?.value.trim() || '';
@@ -216,32 +166,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-
     async function handleRegister(e) {
         e.preventDefault();
         const name = document.getElementById('name')?.value.trim() || '';
         const email = document.getElementById('email')?.value.trim() || '';
         const password = document.getElementById('password')?.value.trim() || '';
-        const confirmPassword = document.getElementById('confirmPassword')?.value.trim() || '';
-
-        // Validações
-        if (!name || name.split(' ').length < 2) {
-            showToast('Erro', 'Por favor, informe seu nome completo', false);
-            return;
-        }
-
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            showToast('Erro', 'Por favor, informe um email válido', false);
-            return;
-        }
 
         if (password.length < 8) {
             showToast('Aviso', 'A senha deve ter pelo menos 8 caracteres', false);
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            showToast('Erro', 'As senhas não coincidem', false);
             return;
         }
 

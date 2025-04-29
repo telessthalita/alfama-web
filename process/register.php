@@ -20,7 +20,6 @@ $email    = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
 $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
 try {
-    // Verifica se email já existe
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
     $stmt->execute([$email]);
 
@@ -29,7 +28,6 @@ try {
         exit;
     }
 
-    // Insere novo usuário
     $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
     $stmt->execute([$name, $email, $password]);
 
