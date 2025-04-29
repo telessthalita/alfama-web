@@ -182,6 +182,17 @@
     </div>
   </div>
 </div>
+<div style="position: fixed; bottom: 20px; right: 20px;">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+      <div class="toast-header">
+        <strong id="toastTitle" class="me-auto">Título</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" id="toastMessage">
+        Mensagem aqui.
+      </div>
+    </div>
+  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/script.js" type="module"></script>

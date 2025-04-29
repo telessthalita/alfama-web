@@ -165,7 +165,6 @@ document.addEventListener('DOMContentLoaded', function () {
             showToast('Erro', error.message || 'Falha ao fazer login', false);
         }
     }
-
     async function handleRegister(e) {
         e.preventDefault();
         const name = document.getElementById('name')?.value.trim() || '';
@@ -173,10 +172,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById('password')?.value.trim() || '';
 
         if (password.length < 8) {
-            showToast('Aviso', 'A senha deve ter pelo menos 8 caracteres', false);
+            showToast('Aviso', 'A senha deve ter mais de 8 caracteres', false);
             return;
         }
-
         try {
             const response = await fetch('process/register.php', {
                 method: 'POST',
@@ -191,7 +189,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             showToast('Sucesso', 'Cadastro realizado com sucesso!');
-            setTimeout(() => window.location.href = 'index.php', 2000);
+
+            registerForm.reset();
         } catch (error) {
             showToast('Erro', error.message || 'Erro ao processar cadastro', false);
         }
